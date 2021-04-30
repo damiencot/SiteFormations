@@ -1,0 +1,30 @@
+﻿@model Data.Formation
+@{ 
+    ViewData["Title"] = "Laisser un Avis sur la formation : "+@Model.Nom;
+}
+
+<h1>Laisser un Avis sur la formation : @Model.Nom</h1>
+<p> Merci de compléter les champs ci dessous : </p>
+
+<form action="/Avis/SaveComment">
+
+    <input type="text" name="nom"/>
+    <br />
+    <p>Merci d'écrir votre avis ci dessous</p>
+    <textarea cols="5" name="commentaire"></textarea>
+    <select name="note">
+        <option>1</option>
+        <option>1.5</option>
+        <option>2</option>
+        <option>2.5</option>
+        <option>3</option>
+        <option>3.5</option>
+        <option>4</option>
+        <option>4.5</option>
+        <option>5</option>
+    </select>
+
+    <input type="submit" value="Poster votre avis"/>
+    <input type="hidden" name="idFormation" value="@Model.Id"/>
+
+</form>
