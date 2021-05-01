@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using AvisFormationsCore.WebUi.Models;
+using Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,17 +27,17 @@ namespace AvisFormationsCore.WebUi.Controllers
             return View(formation);
         }
 
-        public IActionResult SaveComment(string commentaire, string nom, string note, string idFormation)
+        public IActionResult SaveComment(LaisserUnAvisViewModel viewModel)
         {
-            if (String.IsNullOrEmpty(nom) || String.IsNullOrEmpty(note))
+            if (String.IsNullOrEmpty(viewModel.Nom) || String.IsNullOrEmpty(viewModel.Note))
             {
                 return RedirectToAction("LaisserUnAvis");
             }
 
             AvisRepository repository = new AvisRepository();
-            repository.SaveAvis(commentaire, nom);
+            repository.SaveAvis(viewModel.Commentaire, viewModel.Nom, viewModel.IdFormation);
 
-            return RedirectToAction("DetailsFormation", "Formation", new { idFormation= idFormation });
+            return RedirectToAction("DetailsFormation", "Formation", new { idFormation= viewModel.IdFormation });
         }
     }
 }
