@@ -1,4 +1,4 @@
-﻿@model Data.Formation
+﻿@model LaisserUnAvisViewModel
 @{ 
     ViewData["Title"] = "Laisser un Avis sur la formation : "+@Model.Nom;
 }
@@ -8,10 +8,10 @@
 
 <form action="/Avis/SaveComment">
 
-    <input type="text" name="nom"/>
+    <input type="text" name="nom" value="@Model.Nom"/>
     <br />
     <p>Merci d'écrir votre avis ci dessous</p>
-    <textarea cols="5" name="commentaire"></textarea>
+    <textarea cols="5" name="commentaire">@Model.Commentaire</textarea>
     <select name="note">
         <option>1</option>
         <option>1.5</option>
@@ -25,6 +25,6 @@
     </select>
 
     <input type="submit" value="Poster votre avis"/>
-    <input type="hidden" name="idFormation" value="@Model.Id"/>
+    <input type="hidden" name="idFormation" value="@Model.IdFormation"/>
 
 </form>

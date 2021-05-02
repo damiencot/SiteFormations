@@ -24,14 +24,26 @@ namespace AvisFormationsCore.WebUi.Controllers
             {
                 return RedirectToAction("ToutesLesFormations", "Formation");
             }
-            return View(formation);
+            var vm = new LaisserUnAvisViewModel();
+            vm.Nom = formation.Nom;
+            vm.IdFormation = formation.Id.ToString();
+
+            return View(vm);
         }
 
         public IActionResult SaveComment(LaisserUnAvisViewModel viewModel)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View("LaisserUnAvis", viewModel);
+            }
+
+
+
             if (String.IsNullOrEmpty(viewModel.Nom) || String.IsNullOrEmpty(viewModel.Note))
             {
-                return RedirectToAction("LaisserUnAvis");
+                return RedirectToAction("LaisserUnAvis", new { idFormation = viewModel.IdFormation});
             }
 
             AvisRepository repository = new AvisRepository();
